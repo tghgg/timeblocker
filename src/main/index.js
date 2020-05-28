@@ -10,6 +10,7 @@ const MAIN_WINDOW_CONFIG = {
     minHeight: 600,
     backgroundColor: '#1f1f1f',
     show: false,
+    autoHideMenuBar: true,
     webPreferences: { nodeIntegration: true },
     enableRemoteModule: false
 };
