@@ -1,6 +1,6 @@
 {
   "name": "timeblocker",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "A timeblocking app",
   "main": "./src/main/index.js",
   "scripts": {
@@ -11,15 +11,15 @@
     "pack_linux": "electron-builder -l"
   },
   "build": {
-    "appId": "me.tasktracker.TuDu",
-    "productName": "TuDu",
+    "appId": "me.tasktracker.Timeblocker",
+    "productName": "Timeblocker",
     "linux": {
       "target": [
         "AppImage",
         "deb"
       ],
       "category": "Office",
-      "executableName": "TuDu"
+      "executableName": "Timeblocker"
     },
     "win": {
       "target": "NSIS"
