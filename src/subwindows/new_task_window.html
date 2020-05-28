@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" href="./new_task_window.css" />
+</head>
+
+<body>
+  <div class="main">
+    <form>
+      <input id="task-name" type="text" autofocus required placeholder="Task name" pattern="^[a-zA-Z0-9 ]*$">
+      <div>
+        <input class="task-time-span" id="task-start" type="number" min="0" max="23" required placeholder="Start">
+        <input class="task-time-span" id="task-end" type="number" min="0" max="23" required placeholder="End">
+      </div>
+      <button>Create Task</button>
+    </form>
+    <button>Cancel</button>
+  </div>
+</body>
+<script src='./new_task_window.js'></script>
+
+</html>
