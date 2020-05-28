@@ -118,3 +118,11 @@ button {
     text-decoration:none;
     cursor: pointer;
 }
+
+::-webkit-scrollbar {
+    background: none;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgb(51, 53, 54);
+}
