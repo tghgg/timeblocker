@@ -20,7 +20,6 @@
     
     <section class="content">
         <span class="time-color-block"></span>
-        <span class="tasks-color-block"></span>
         <div class="tasks">
             <task v-for="task in tasks" v-bind:timespan="task.timeSpan" v-bind:name="task.name" v-bind:id="task.id"></task>
         </div>
