@@ -1,16 +1,19 @@
 const { ipcRenderer } = require('electron');
 
-const HOURS_LIST = new Vue({
-    el: '.hours-list',
+class Task {
+    constructor (timeSpan, name, id) {
+        this.timeSpan = timeSpan;
+        this.name = name;
+        this.id = id;
+    }
+}
+
+const TASKS_LIST = new Vue({
+    el: '.tasks',
     data: {
-        hours: []
+        tasks: [new Task('1 > 10', 'kill demons', '12355')]
     }
 });
-
-// Init hours list
-for (let i = 0; i < 24; i++) {
-    HOURS_LIST.hours.push(i+1);
-}
 
 // Auto resize the page
 ipcRenderer.on('resize', (event, data) => {
