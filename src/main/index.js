@@ -1,5 +1,5 @@
-const { app, BrowserWindow, ipcMain, dialog, Menu } = require('electron');
-const { basename, extname, join, dirname } = require('path');
+const { app, BrowserWindow, ipcMain, dialog } = require('electron');
+const { join } = require('path');
 
 const DataHandler = require('../../lib/data.js');
 
