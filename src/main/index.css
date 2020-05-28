@@ -21,6 +21,11 @@ header > div > h3 {
 }
 .title > div:first-child > button {
     color: grey;
+    cursor: default;
+}
+.title > .actions {
+    width: 80%;
+    display: flex;
 }
 
 .heading {
@@ -115,6 +120,12 @@ button {
 	font-size: 1rem;
     text-decoration:none;
     cursor: pointer;
+}
+button:hover {
+    background-color: grey;
+}
+button:focus {
+    background-color: transparent;
 }
 
 ::-webkit-scrollbar {
