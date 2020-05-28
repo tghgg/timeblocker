@@ -11,7 +11,7 @@ class Task {
 const TASKS_LIST = new Vue({
     el: '.tasks',
     data: {
-        tasks: [new Task('1 > 10', 'kill demons', '12355')]
+        tasks: [new Task('1 > 10', 'kill demons', '12355'),new Task('1 > 10', 'kill demons', '123355'),new Task('1 > 10', 'kill demons', '123554'),]
     }
 });
 

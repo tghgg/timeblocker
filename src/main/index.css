@@ -17,6 +17,10 @@ header > div > h3 {
 .title {
     height: 50%;
 }
+.title > h3 {
+    padding-left: 2px;
+}
+
 .heading {
     display: flex;
     width: 100%;
@@ -55,6 +59,7 @@ header > div > h3 {
 
 .tasks {
     display: flex;
+    flex-direction: column;
     height: 100%;
     width: 100%;
     position: absolute;
