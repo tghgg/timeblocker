@@ -1,0 +1,38 @@
+{
+  "name": "timeblocker",
+  "version": "0.0.1",
+  "description": "A timeblocking app",
+  "main": "./src/main/index.js",
+  "scripts": {
+    "start": "electron .",
+    "pack": "electron-builder -wl",
+    "semistandard": "semistandard --fix",
+    "pack_windows": "electron-builder -w",
+    "pack_linux": "electron-builder -l"
+  },
+  "build": {
+    "appId": "me.tasktracker.TuDu",
+    "productName": "TuDu",
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ],
+      "category": "Office",
+      "executableName": "TuDu"
+    },
+    "win": {
+      "target": "NSIS"
+    }
+  },
+  "author": {
+    "email": "falling_snowdin@protonmail.com",
+    "name": "Falling Snowdin"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^8.3.0",
+    "electron-builder": "^22.6.1",
+    "semistandard": "^14.2.0"
+  }
+}
