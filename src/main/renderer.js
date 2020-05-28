@@ -1,36 +1,36 @@
 const { ipcRenderer } = require('electron');
 
 class Task {
-    constructor (timeSpan, name, id) {
-        this.timeSpan = timeSpan;
-        this.name = name;
-        this.id = id;
-    }
+  constructor (timeSpan, name, id) {
+    this.timeSpan = timeSpan;
+    this.name = name;
+    this.id = id;
+  }
 }
 
 const TASKS_LIST = new Vue({
-    el: '.tasks',
-    data: {
-        tasks: []
-    }
+  el: '.tasks',
+  data: {
+    tasks: []
+  }
 });
 
 document.querySelector('.actions > button:first-child').addEventListener('click', (event) => {
-    console.log('New task');
-    ipcRenderer.send('ask-new-task');
+  console.log('New task');
+  ipcRenderer.send('ask-new-task');
 });
 
 // Auto resize the page
 ipcRenderer.on('resize', (event, data) => {
-    document.querySelector('body').style.height = `${data}px`;
+  document.querySelector('body').style.height = `${data}px`;
 });
 
 // Receive an object containing tasks with their respective names as keys
 ipcRenderer.on('create-task', (event, data) => {
-    console.log('Add task(s) to the current list');
-    const TASKS_TO_ADD = Object.keys(data);
-    for (let i = 0; i < TASKS_TO_ADD.length; i++) {
-        const NEW_TASK = new Task(data[TASKS_TO_ADD[i]].timeSpan, data[TASKS_TO_ADD[i]].name, data[TASKS_TO_ADD[i]].id);
-        TASKS_LIST.tasks.push(NEW_TASK);
-    }
+  console.log('Add task(s) to the current list');
+  const TASKS_TO_ADD = Object.keys(data);
+  for (let i = 0; i < TASKS_TO_ADD.length; i++) {
+    const NEW_TASK = new Task(data[TASKS_TO_ADD[i]].timeSpan, data[TASKS_TO_ADD[i]].name, data[TASKS_TO_ADD[i]].id);
+    TASKS_LIST.tasks.push(NEW_TASK);
+  }
 });
