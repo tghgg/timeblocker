@@ -13,10 +13,17 @@
     </header>
     <div class="main">
         <div class="time">
-            <h3>Time</h3>
+            <div class="heading">
+                <h3>Time</h3>
+            </div>
+            <div class="hours-list">
+                <hour v-for="hour in hours" v-bind:time="hour"></hour>
+            </div>
         </div>
         <div class="timeblocks">
-            <h3>Blocks</h3>
+            <div class="heading">
+                <h3>Blocks</h3>
+            </div>
         </div>
     </div>
 </body>
@@ -24,6 +31,7 @@
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <!-- Production Vue -->
 <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script> -->
+<script src='./vue-components/hours-list.js'></script>
 <script src='./renderer.js'></script>
 
 </html>

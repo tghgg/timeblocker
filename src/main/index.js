@@ -6,9 +6,9 @@ const DataHandler = require('../../lib/data.js');
 let MainWindow;
 
 const MAIN_WINDOW_CONFIG = {
-    width: 800,
-    height: 600,
-    show: true,
+    minWidth: 800,
+    minHeight: 600,
+    show: false,
     webPreferences: { nodeIntegration: true },
     enableRemoteModule: false
 };
@@ -20,11 +20,14 @@ app.on('ready', () => {
 
     MainWindow = new BrowserWindow(MAIN_WINDOW_CONFIG);
     MainWindow.loadFile('./src/main/index.html');
-    MainWindow.webContents.send('resize', MainWindow.getContentBounds());
 
+    MainWindow.on('ready-to-show', (event) => {
+        MainWindow.show();
+        MainWindow.webContents.send('resize', MainWindow.getContentSize()[1]);
+    });
 
     MainWindow.on('resize', () => {
-        MainWindow.webContents.send('resize', MainWindow.getContentBounds());
+        MainWindow.webContents.send('resize', MainWindow.getContentSize()[1]);
     });
 
 });
