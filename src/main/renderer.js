@@ -14,6 +14,5 @@ for (let i = 0; i < 24; i++) {
 
 // Auto resize the page
 ipcRenderer.on('resize', (event, data) => {
-    console.log(data);
     document.querySelector('body').style.height = `${data}px`;
 });

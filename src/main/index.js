@@ -27,6 +27,7 @@ app.on('ready', () => {
     });
 
     MainWindow.on('resize', () => {
+        console.log('re');
         MainWindow.webContents.send('resize', MainWindow.getContentSize()[1]);
     });
 
