@@ -8,6 +8,7 @@ let MainWindow;
 const MAIN_WINDOW_CONFIG = {
     minWidth: 800,
     minHeight: 600,
+    backgroundColor: '#1f1f1f',
     show: false,
     webPreferences: { nodeIntegration: true },
     enableRemoteModule: false

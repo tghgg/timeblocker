@@ -2,11 +2,11 @@ body {
     font-family: Arial, Helvetica, sans-serif;
     height: 600px;
     overflow: hidden;
+    color: white;
     margin: 0;
 }
 
 header {
-    background-color: gray;
     height: 10%;
 }
 
@@ -24,14 +24,13 @@ header > div > h3 {
 }
 .heading > h3 {
     text-align: center;
+    background-color: rgb(73, 76, 78);
 }
 .heading > h3:first-child {
     width: 20%;
-    background-color: rgb(105, 105, 105);
 }
 .heading > h3:last-child {
     width: 80%;
-    background-color: rgb(202, 145, 154);
 }
 
 .content {
@@ -44,7 +43,7 @@ header > div > h3 {
     width: 20%;
     display: flex;
     flex-direction: column;
-    background-color: lightgray;
+    background-color: rgb(48, 48, 48);
     text-align: center;
     overflow: auto;
 }
@@ -52,7 +51,6 @@ header > div > h3 {
     height: 100%;
     width: 80%;
     display: block;
-    background-color: lightpink;
 }
 
 .tasks {
@@ -66,6 +64,7 @@ header > div > h3 {
     display: flex;
     width: 100%;
     height: 10%;
+	border-bottom:1px solid #525252;
 }
 
 .taskTime {
@@ -73,6 +72,12 @@ header > div > h3 {
     width: 20%;
     height: 100%;
     text-align: center;
+    background-color:transparent;
+}
+.taskTime > button {
+    margin: 0;
+    padding: 0;
+    width: 100%;
 }
 
 .taskInfo {
@@ -81,13 +86,38 @@ header > div > h3 {
     height: 100%;
 }
 .taskInfo > button {
-    display:block;
-    height: 100%;
     width: 80%;
 }
-.taskInfo > h3 {
+
+
+.taskInfo > button:hover {
+    background-color:transparent;
+}
+.taskInfo > button:active {
+	position:relative;
+	top:1px;
+}
+
+.taskState {
     height: 100%;
     text-align: center;
     display: block;
     width: 20%;
+    background-color: rgb(14, 14, 14);
+    cursor: pointer;
+}
+.taskState > button {
+    width: 100%;
+}
+
+button {
+    display:block;
+    height: 100%;
+    background-color:transparent;
+    border: none;
+	color:#ffffff;
+	font-family: monospace, sans-serif;
+	font-size: 1rem;
+    text-decoration:none;
+    cursor: pointer;
 }
