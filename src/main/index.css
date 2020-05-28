@@ -86,10 +86,6 @@ header > div > h3 {
 }
 .taskInfo > button {
     width: 80%;
-}
-
-
-.taskInfo > button:hover {
     background-color:transparent;
 }
 .taskInfo > button:active {
