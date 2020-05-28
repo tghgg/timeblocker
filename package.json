@@ -29,6 +29,7 @@
     "email": "falling_snowdin@protonmail.com",
     "name": "Falling Snowdin"
   },
+  "homepage": "https://github.com/tghgg/timeblocker",
   "license": "MIT",
   "devDependencies": {
     "electron": "^8.3.0",
