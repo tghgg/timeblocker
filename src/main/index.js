@@ -119,25 +119,39 @@ ipcMain.on('complete-task', (event, data) => {
 // Remove task from task history
 ipcMain.on('remove-task', (event, data) => {
     dialog.showMessageBox(MainWindow, {
-      title: 'Confirmation',
-      type: 'question',
-      buttons: ['Cancel', 'Remove'],
-      defaultId: 0,
-      message: `Remove ${data.name}?`
+        title: 'Confirmation',
+        type: 'question',
+        buttons: ['Cancel', 'Remove'],
+        defaultId: 0,
+        message: `Remove ${data.name}?`
     }).then((result) => {
-      if (result.response === 1) {
-        console.log('Remove task');
-        // Delete from history
-        const CURRENT_HISTORY = JSON.parse(DataHandler.readSync(TASK_HISTORY_PATH));
-        delete CURRENT_HISTORY[data.id];
-        DataHandler.update(TASK_HISTORY_PATH, JSON.stringify(CURRENT_HISTORY), (err) => {
-          if (err) dialog.showErrorBox('Error', `${err}\nFailed to remove task from task history.`);
-        });
-        // Remove from the renderer
-        MainWindow.webContents.send('remove-task', data.id);
-      }
+        if (result.response === 1) {
+            console.log('Remove task');
+            // Delete from history
+            const CURRENT_HISTORY = JSON.parse(DataHandler.readSync(TASK_HISTORY_PATH));
+            delete CURRENT_HISTORY[data.id];
+            DataHandler.update(TASK_HISTORY_PATH, JSON.stringify(CURRENT_HISTORY), (err) => {
+                if (err) dialog.showErrorBox('Error', `${err}\nFailed to remove task from task history.`);
+            });
+            // Remove from the renderer
+            MainWindow.webContents.send('remove-task', data.id);
+        }
     }, (err) => {
-      if (err) dialog.showErrorBox('Error', `${err}\nError removing task.`);
+        if (err) dialog.showErrorBox('Error', `${err}\nError removing task.`);
     });
-  });
-  
+});
+
+// Menu bar actions
+ipcMain.on('quit', (event) => {
+    app.quit();
+});
+
+ipcMain.on('about', (event) => {
+    dialog.showMessageBox(MainWindow, {
+        title: 'About',
+        type: 'info',
+        icon: './assets/fsnowdin.png',
+        message: 'Timeblocker by Falling Snowdin.\nNode.js version: ' + process.versions.node + '; ' + 'Electron version: ' + process.versions.electron + '.\nRepository: https://github.com/tghgg/Tracker',
+        buttons: ['Close']
+      });
+});
