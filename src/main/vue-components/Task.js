@@ -8,7 +8,6 @@ Vue.component('task', {
   methods: {
     completeTask: function () {
       ipcRenderer.send('complete-task', this.id);
-      console.log('REmove ' + this.id);
       document.getElementById(this.id).style['background-color'] = 'rgb(55, 207, 93)';
       document.getElementById(this.id).style['border-color'] = 'rgb(55, 207, 93)';
       document.querySelector(`#${this.id} > div > button`).disabled = true;

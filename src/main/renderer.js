@@ -9,7 +9,7 @@ class Task {
 }
 
 const TASKS_LIST = new Vue({
-  el: '.tasks',
+  el: '.tasks-list',
   data: {
     tasks: []
   }
