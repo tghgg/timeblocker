@@ -113,11 +113,11 @@ ipcMain.on('ask-remove-task', (event, data) => {
   dialog.showMessageBox(MainWindow, {
     title: 'Confirmation',
     type: 'question',
-    buttons: ['Cancel', 'Remove'],
-    defaultId: 0,
+    buttons: ['Remove', 'Cancel'],
+    defaultId: 1,
     message: `Remove ${data.name}?`
   }).then((result) => {
-    if (result.response === 1) {
+    if (result.response === 0) {
       console.log('Remove task');
       // Delete from history
       const CURRENT_HISTORY = JSON.parse(DataHandler.readSync(TASK_HISTORY_PATH));
