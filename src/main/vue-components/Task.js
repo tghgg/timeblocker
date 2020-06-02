@@ -8,11 +8,14 @@ Vue.component('task', {
   methods: {
     completeTask: function () {
       ipcRenderer.send('complete-task', this.id);
+
+      // Hightlight with green
       document.getElementById(this.id).style['background-color'] = 'rgb(55, 207, 93)';
       document.getElementById(this.id).style['border-color'] = 'rgb(55, 207, 93)';
       document.querySelector(`#${this.id} > div > button`).disabled = true;
       document.querySelector(`#${this.id} > .taskInfo > .taskState`).style['background-color'] = 'rgb(55, 207, 93)';
       document.querySelector(`#${this.id} > .taskInfo > .taskState > button`).innerHTML = 'Done!';
+
       setTimeout(() => document.getElementById(this.id).remove(), 500);
     },
     removeTask: function (event) {

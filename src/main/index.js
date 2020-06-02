@@ -52,19 +52,12 @@ app.on('ready', () => {
     } else {
       console.log('Task history exists. Adding existing tasks...');
       DataHandler.read(TASK_HISTORY_PATH, (err, data) => {
-        if (err) {
-          dialog.showErrorBox('Error', `${err}\nError reading existing task history.`);
-        } else {
-          console.log('Send them tass');
-          MainWindow.webContents.send('create-task', JSON.parse(data));
-        }
+        err ? dialog.showErrorBox('Error', `${err}\nError reading existing task history.`) : MainWindow.webContents.send('create-task', JSON.parse(data));
       });
     }
   });
 
-  MainWindow.on('resize', () => {
-    MainWindow.webContents.send('resize', MainWindow.getContentSize()[1]);
-  });
+  MainWindow.on('resize', () => MainWindow.webContents.send('resize', MainWindow.getContentSize()[1]));
 });
 
 // LISTENERS
@@ -142,16 +135,14 @@ ipcMain.on('remove-task', (event, data) => {
 
 // MENU BAR LISTENERS
 
-ipcMain.on('quit', (event) => {
-  app.quit();
-});
+ipcMain.on('quit', event => app.quit());
 
-ipcMain.on('about', (event) => {
+ipcMain.on('about', event => 
   dialog.showMessageBox(MainWindow, {
     title: 'About',
     type: 'info',
     icon: './assets/fsnowdin.png',
     message: 'Timeblocker by Falling Snowdin.\nNode.js version: ' + process.versions.node + '; ' + 'Electron version: ' + process.versions.electron + '.\nRepository: https://github.com/tghgg/Tracker',
     buttons: ['Close']
-  });
-});
+  })
+);
