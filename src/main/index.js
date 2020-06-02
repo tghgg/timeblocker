@@ -109,7 +109,7 @@ ipcMain.on('complete-task', (event, data) => {
 });
 
 // Remove task from task history
-ipcMain.on('remove-task', (event, data) => {
+ipcMain.on('ask-remove-task', (event, data) => {
   dialog.showMessageBox(MainWindow, {
     title: 'Confirmation',
     type: 'question',

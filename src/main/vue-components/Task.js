@@ -14,13 +14,13 @@ Vue.component('task', {
       document.getElementById(this.id).style['border-color'] = 'rgb(55, 207, 93)';
       document.querySelector(`#${this.id} > div > button`).disabled = true;
       document.querySelector(`#${this.id} > .taskInfo > .taskState`).style['background-color'] = 'rgb(55, 207, 93)';
-      document.querySelector(`#${this.id} > .taskInfo > .taskState > button`).innerHTML = 'Done!';
+      document.querySelector(`#${this.id} > .taskInfo > .taskState > button`).textContent = 'Done!';
 
       setTimeout(() => document.getElementById(this.id).remove(), 500);
     },
     removeTask: function (event) {
       event.preventDefault();
-      ipcRenderer.send('remove-task', { id: this.id, name: this.name });
+      ipcRenderer.send('ask-remove-task', { id: this.id, name: this.name });
     }
   }
 });
