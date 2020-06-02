@@ -67,7 +67,8 @@ app.on('ready', () => {
   });
 });
 
-// Listeners
+// LISTENERS
+
 ipcMain.on('ask-new-task', (event, data) => {
   NewTaskWindow = new BrowserWindow(NEW_TASK_WINDOW_CONFIG);
   NewTaskWindow.loadFile('./src/subwindows/new_task_window.html');
@@ -104,9 +105,7 @@ ipcMain.on('complete-task', (event, data) => {
       console.log('Removing ' + data);
       const CURRENT_HISTORY = JSON.parse(historyData);
 
-      console.log(CURRENT_HISTORY);
       delete CURRENT_HISTORY[data];
-      console.log(CURRENT_HISTORY);
 
       // Update history
       DataHandler.update(TASK_HISTORY_PATH, JSON.stringify(CURRENT_HISTORY), (err) => {
@@ -141,7 +140,8 @@ ipcMain.on('remove-task', (event, data) => {
   });
 });
 
-// Menu bar actions
+// MENU BAR LISTENERS
+
 ipcMain.on('quit', (event) => {
   app.quit();
 });
