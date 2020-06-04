@@ -22,6 +22,9 @@ header > div > h3 {
     color: grey;
     cursor: default;
 }
+.title > div:first-child > button:hover {
+    background-color: transparent;
+}
 .title > .actions {
     width: 80%;
     display: flex;
