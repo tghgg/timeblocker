@@ -138,7 +138,7 @@ ipcMain.on('ask-remove-task', (event, data) => {
 
 ipcMain.on('quit', event => app.quit());
 
-ipcMain.on('about', event => 
+ipcMain.on('about', event =>
   dialog.showMessageBox(MainWindow, {
     title: 'About',
     type: 'info',
