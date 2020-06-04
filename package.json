@@ -1,6 +1,6 @@
 {
   "name": "timeblocker",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A timeblocking app",
   "main": "./src/main/index.js",
   "scripts": {
@@ -19,6 +19,7 @@
         "deb"
       ],
       "category": "Office",
+      "icon": "./assets/512x512.png",
       "executableName": "Timeblocker"
     },
     "win": {

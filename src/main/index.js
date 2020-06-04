@@ -14,7 +14,8 @@ const MAIN_WINDOW_CONFIG = {
   show: false,
   autoHideMenuBar: true,
   webPreferences: { nodeIntegration: true },
-  enableRemoteModule: false
+  enableRemoteModule: false,
+  icon: './assets/512x512.png'
 };
 
 const NEW_TASK_WINDOW_CONFIG = {
