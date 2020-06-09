@@ -64,7 +64,8 @@ app.on('ready', () => {
     Prom.then((userInput) => {
       console.log(userInput);
       console.log("ut shite")
-    })
+    });
+    Prom.catch((err) => console.log(err));
   });
 
   MainWindow.on('resize', () => MainWindow.webContents.send('resize', MainWindow.getContentSize()[1]));
