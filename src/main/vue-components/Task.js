@@ -4,7 +4,15 @@
 
 Vue.component('task', {
   props: ['timespan', 'name', 'id'],
-  template: '<div class="task" :id="id" v-on:contextmenu="removeTask($event)"><div class="taskTime"><button v-on:click="editTaskTimespan">{{ timespan }}</button></div><div class="taskInfo"><button v-on:click="editTaskName">{{ name }}</button><div class="taskState"><button v-on:click="completeTask">X</button></div></div></div>',
+  template: `<div class="task" :id="id" v-on:contextmenu="removeTask($event)">
+  <div class="taskTime">
+    <button v-on:click="editTaskTimespan">{{ timespan }}</button>
+  </div>
+  <div class="taskInfo">
+    <button v-on:click="editTaskName">{{ name }}</button>
+  <div class="taskState">
+    <button v-on:click="completeTask">X</button>
+  </div></div></div>`,
   methods: {
     completeTask: function () {
       ipcRenderer.send('complete-task', this.id);
