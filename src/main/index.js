@@ -56,16 +56,6 @@ app.on('ready', () => {
         err ? dialog.showErrorBox('Error', `${err}\nError reading existing task history.`) : MainWindow.webContents.send('create-task', JSON.parse(data));
       });
     }
-
-    // Test Promptr
-    const Promptr = require('../../lib/promptr/prompt');
-
-    let Prom = Promptr.prompt(NEW_TASK_WINDOW_CONFIG, "Helu???");
-    Prom.then((userInput) => {
-      console.log(userInput);
-      console.log("ut shite")
-    });
-    Prom.catch((err) => console.log(err));
   });
 
   MainWindow.on('resize', () => MainWindow.webContents.send('resize', MainWindow.getContentSize()[1]));
