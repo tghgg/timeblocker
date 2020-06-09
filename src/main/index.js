@@ -1,9 +1,12 @@
 const { app, BrowserWindow, ipcMain, dialog } = require('electron');
 const { join } = require('path');
 
+// My own libraries
 const DataHandler = require('../../lib/data.js');
+const Promptr = require('../../lib/promptr/prompt.js');
 
 const TASK_HISTORY_PATH = join(app.getPath('userData'), 'tasks-history.json');
+
 
 let MainWindow, NewTaskWindow;
 
@@ -34,6 +37,17 @@ const NEW_TASK_WINDOW_CONFIG = {
   modal: true
 };
 
+// Helpers
+function getCurrentTaskHistory() {
+  return JSON.parse(DataHandler.readSync(TASK_HISTORY_PATH));
+}
+function updateTaskHistory(newTaskHistory, errProcess='Something has gone wrong!') {
+  if (typeof(newTaskHistory) !== 'object') return new Error("New task history is of invalid type.");
+  DataHandler.update(TASK_HISTORY_PATH, JSON.stringify(newTaskHistory), (err) => {
+    if (err) dialog.showErrorBox('Error', `${err}\n${errProcess}`);
+  });
+}
+
 // Intialize app
 app.on('ready', () => {
   app.allowRendererProcessReuse = true;
@@ -57,7 +71,6 @@ app.on('ready', () => {
       });
     }
   });
-
   MainWindow.on('resize', () => MainWindow.webContents.send('resize', MainWindow.getContentSize()[1]));
 });
 
@@ -121,7 +134,7 @@ ipcMain.on('ask-remove-task', (event, data) => {
     if (result.response === 0) {
       console.log('Remove task');
       // Delete from history
-      const CURRENT_HISTORY = JSON.parse(DataHandler.readSync(TASK_HISTORY_PATH));
+      const CURRENT_HISTORY = getCurrentTaskHistory();
       delete CURRENT_HISTORY[data.id];
       DataHandler.update(TASK_HISTORY_PATH, JSON.stringify(CURRENT_HISTORY), (err) => {
         if (err) dialog.showErrorBox('Error', `${err}\nFailed to remove task from task history.`);
@@ -148,7 +161,27 @@ ipcMain.on('about', event =>
   })
 );
 
-ipcMain.on('edit-task-name', (event, data) => {
-  EditTaskWindow = new BrowserWindow(NEW_TASK_WINDOW_CONFIG);
-  EditTaskWindow.loadFile('./src/subwindows/create_new_task/new_task_window.html');
+// Prompt for the new name
+ipcMain.handle('edit-task-name', (event, taskInfo) => {
+  Promptr.prompt(NEW_TASK_WINDOW_CONFIG, 'Enter a new name for your task.').then((newName) => {
+    
+    // Update database
+    const CURRENT_HISTORY = getCurrentTaskHistory();
+    
+    // Create a new key identical to the old task, just with a different name
+    let renamedTask = {}
+    renamedTask[newName] = {}; 
+    Object.assign(renamedTask[newName], CURRENT_HISTORY[taskInfo.id]);
+    renamedTask.name = newName;
+
+    // Modify the task history
+    delete CURRENT_HISTORY[taskInfo.id];
+    CURRENT_HISTORY[newName] = renameTask;
+
+    // Update
+    updateTaskHistory(CURRENT_HISTORY, 'Could not rename a task in the task history.');
+
+    // Return the name to the Task component
+    return newName;
+  })
 })

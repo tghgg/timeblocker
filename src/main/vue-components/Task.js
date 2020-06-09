@@ -4,12 +4,15 @@
 
 Vue.component('task', {
   props: ['timespan', 'name', 'id'],
+  data: function () {
+    return { taskName: this.name };
+  },
   template: `<div class="task" :id="id" v-on:contextmenu="removeTask($event)">
   <div class="taskTime">
     <button v-on:click="editTaskTimespan">{{ timespan }}</button>
   </div>
   <div class="taskInfo">
-    <button v-on:click="editTaskName">{{ name }}</button>
+    <button v-on:click="editTaskName">{{ taskName }}</button>
   <div class="taskState">
     <button v-on:click="completeTask">X</button>
   </div></div></div>`,
@@ -30,17 +33,20 @@ Vue.component('task', {
       event.preventDefault();
       ipcRenderer.send('ask-remove-task', { id: this.id, name: this.name });
     },
-    editTaskName: function() {
+    editTaskName: function () {
       console.log("edit task name");
 
-      ipcRenderer.send('edit-task-name', { id: this.id, name: this.name })
-
-
+      // Ask for the new name
+      // Change the name on Main response
+      ipcRenderer.invoke('edit-task-name', { id: this.id, name: this.name }).then((newName) => {
+        this.taskName = newName;
+      })
+      
     },
-    editTaskTimespan: function() {
+    editTaskTimespan: function () {
       console.log("edit task timespan")
 
-      ipcRenderer.send('edit-task-timespan');
+      ipcRenderer.send('edit-task-timespan', { id: this.id, name: this.name });
 
     }
   }
