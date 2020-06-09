@@ -4,7 +4,7 @@
 
 Vue.component('task', {
   props: ['timespan', 'name', 'id'],
-  template: '<div class="task" :id="id" v-on:contextmenu="removeTask($event)"><div class="taskTime"><button>{{ timespan }}</button></div><div class="taskInfo"><button>{{ name }}</button><div class="taskState"><button v-on:click="completeTask">X</button></div></div></div>',
+  template: '<div class="task" :id="id" v-on:contextmenu="removeTask($event)"><div class="taskTime"><button v-on:click="editTaskTimespan">{{ timespan }}</button></div><div class="taskInfo"><button v-on:click="editTaskName">{{ name }}</button><div class="taskState"><button v-on:click="completeTask">X</button></div></div></div>',
   methods: {
     completeTask: function () {
       ipcRenderer.send('complete-task', this.id);
@@ -21,6 +21,19 @@ Vue.component('task', {
     removeTask: function (event) {
       event.preventDefault();
       ipcRenderer.send('ask-remove-task', { id: this.id, name: this.name });
+    },
+    editTaskName: function() {
+      console.log("edit task name");
+
+      ipcRenderer.send('edit-task-name', { id: this.id, name: this.name })
+
+
+    },
+    editTaskTimespan: function() {
+      console.log("edit task timespan")
+
+      ipcRenderer.send('edit-task-timespan');
+
     }
   }
 });

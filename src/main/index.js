@@ -65,7 +65,7 @@ app.on('ready', () => {
 
 ipcMain.on('ask-new-task', (event, data) => {
   NewTaskWindow = new BrowserWindow(NEW_TASK_WINDOW_CONFIG);
-  NewTaskWindow.loadFile('./src/subwindows/new_task_window.html');
+  NewTaskWindow.loadFile('./src/subwindows/create_new_task/new_task_window.html');
 });
 
 // Save the task to history and tell the renderer to render the new task
@@ -147,3 +147,8 @@ ipcMain.on('about', event =>
     buttons: ['Close']
   })
 );
+
+ipcMain.on('edit-task-name', (event, data) => {
+  EditTaskWindow = new BrowserWindow(NEW_TASK_WINDOW_CONFIG);
+  EditTaskWindow.loadFile('./src/subwindows/create_new_task/new_task_window.html');
+})
