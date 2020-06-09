@@ -60,13 +60,14 @@ app.on('ready', () => {
     // Test Promptr
     const Promptr = require('../../lib/promptr/prompt');
 
-    Promptr.prompt(NEW_TASK_WINDOW_CONFIG, "Helu, how can ai hep urr?");
+    let Prom = Promptr.prompt(NEW_TASK_WINDOW_CONFIG, "Helu???");
+    Prom.then((userInput) => {
+      console.log(userInput);
+      console.log("ut shite")
+    })
   });
 
   MainWindow.on('resize', () => MainWindow.webContents.send('resize', MainWindow.getContentSize()[1]));
-
-
-
 });
 
 // LISTENERS
