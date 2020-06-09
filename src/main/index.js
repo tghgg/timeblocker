@@ -56,9 +56,17 @@ app.on('ready', () => {
         err ? dialog.showErrorBox('Error', `${err}\nError reading existing task history.`) : MainWindow.webContents.send('create-task', JSON.parse(data));
       });
     }
+
+    // Test Promptr
+    const Promptr = require('../../lib/promptr/prompt');
+
+    Promptr.prompt(NEW_TASK_WINDOW_CONFIG, "Helu, how can ai hep urr?");
   });
 
   MainWindow.on('resize', () => MainWindow.webContents.send('resize', MainWindow.getContentSize()[1]));
+
+
+
 });
 
 // LISTENERS
