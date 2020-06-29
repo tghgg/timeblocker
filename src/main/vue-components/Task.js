@@ -45,10 +45,7 @@ Vue.component('task', {
       })
     },
     editTaskTimespan: function () {
-      console.log("edit task timespan")
-
       ipcRenderer.send('edit-task-timespan', { id: this.id, name: this.name });
-
     }
   }
 });

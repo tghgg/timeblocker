@@ -32,9 +32,9 @@ const NEW_TASK_WINDOW_CONFIG = {
   show: true,
   webPreferences: { nodeIntegration: true },
   enableRemoteModule: false,
-  parent: MainWindow,
+  // parent: MainWindow,
   autoHideMenuBar: true,
-  modal: true
+  // modal: true
 };
 
 // Helpers
