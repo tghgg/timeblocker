@@ -1,6 +1,6 @@
 {
   "name": "timeblocker",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A timeblocking app",
   "main": "./src/main/index.js",
   "scripts": {
