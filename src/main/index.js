@@ -147,6 +147,30 @@ ipcMain.on('ask-remove-task', (event, data) => {
   });
 });
 
+// Prompt for the new name
+ipcMain.handle('edit-task-name', async (event, taskInfo) => {
+  return await Promptr.prompt(NEW_TASK_WINDOW_CONFIG, taskInfo.name).then((newName) => {
+    
+    // Update database
+    const CURRENT_HISTORY = getCurrentTaskHistory();
+
+    // Create a new key identical to the old task, just with a different name
+    let renamedTask = {};
+    // renamedTask[newName] = {}; 
+    Object.assign(renamedTask, CURRENT_HISTORY[taskInfo.id]);
+    renamedTask.name = newName;
+
+    // Modify the task history
+    CURRENT_HISTORY[taskInfo.id] = renamedTask;
+
+    // Update
+    updateTaskHistory(CURRENT_HISTORY, 'Could not rename a task in the task history.');
+
+    // Return the name to the Task component
+    return newName;
+  })
+});
+
 // MENU BAR LISTENERS
 
 ipcMain.on('quit', event => app.quit());
@@ -161,27 +185,3 @@ ipcMain.on('about', event =>
   })
 );
 
-// Prompt for the new name
-ipcMain.handle('edit-task-name', (event, taskInfo) => {
-  Promptr.prompt(NEW_TASK_WINDOW_CONFIG, 'Enter a new name for your task.').then((newName) => {
-    
-    // Update database
-    const CURRENT_HISTORY = getCurrentTaskHistory();
-    
-    // Create a new key identical to the old task, just with a different name
-    let renamedTask = {}
-    renamedTask[newName] = {}; 
-    Object.assign(renamedTask[newName], CURRENT_HISTORY[taskInfo.id]);
-    renamedTask.name = newName;
-
-    // Modify the task history
-    delete CURRENT_HISTORY[taskInfo.id];
-    CURRENT_HISTORY[newName] = renameTask;
-
-    // Update
-    updateTaskHistory(CURRENT_HISTORY, 'Could not rename a task in the task history.');
-
-    // Return the name to the Task component
-    return newName;
-  })
-})

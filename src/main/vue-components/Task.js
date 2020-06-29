@@ -34,14 +34,15 @@ Vue.component('task', {
       ipcRenderer.send('ask-remove-task', { id: this.id, name: this.name });
     },
     editTaskName: function () {
-      console.log("edit task name");
+
+      document.querySelector(`#${this.id} > div > button`).disabled = true;
 
       // Ask for the new name
       // Change the name on Main response
-      ipcRenderer.invoke('edit-task-name', { id: this.id, name: this.name }).then((newName) => {
+      ipcRenderer.invoke('edit-task-name', { id: this.id, name: this.taskName }).then((newName) => {
         this.taskName = newName;
+        document.querySelector(`#${this.id} > div > button`).disabled = false;
       })
-      
     },
     editTaskTimespan: function () {
       console.log("edit task timespan")
