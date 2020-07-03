@@ -38,6 +38,7 @@ header > div > h3 {
 .heading > h3 {
     text-align: center;
     background-color: rgb(73, 76, 78);
+    font-family: monospace, sans-serif;
 }
 .heading > h3:first-child {
     width: 20%;
