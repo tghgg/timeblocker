@@ -19,8 +19,21 @@ document.querySelector('form').addEventListener('submit', (event) => {
 
   const ID = `task_${safeTaskName}_${CURRENT_TIME.getFullYear()}${CURRENT_TIME.getMonth()}${CURRENT_TIME.getDate()}`;
 
-  ipcRenderer.send('create-new-task', { name: document.getElementById('task-name').value, id: ID, timeSpan: `${document.getElementById('task-start').value} > ${document.getElementById('task-end').value}` });
-  window.close();
+  ipcRenderer.send('create-new-task', {
+    name: document.getElementById('task-name').value,
+    id: ID,
+    timeSpan: {
+      start: Number(document.getElementById('task-start').value),
+      end: Number(document.getElementById('task-end').value)
+    }
+  });
+
+  // Reset all the input fields for easy creation of multiple tasks
+  document.getElementById('task-name').value = '';
+  document.getElementById('task-start').value = '';
+  document.getElementById('task-end').value = '';
+
+  document.getElementById('task-name').focus();
 });
 
 document.querySelector('.main > button').addEventListener('click', (event) => {

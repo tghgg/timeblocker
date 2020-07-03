@@ -7,7 +7,6 @@ const Promptr = require('../../lib/promptr/prompt.js');
 
 const TASK_HISTORY_PATH = join(app.getPath('userData'), 'tasks-history.json');
 
-
 let MainWindow, NewTaskWindow;
 
 const MAIN_WINDOW_CONFIG = {
@@ -32,17 +31,17 @@ const NEW_TASK_WINDOW_CONFIG = {
   show: true,
   webPreferences: { nodeIntegration: true },
   enableRemoteModule: false,
-  // parent: MainWindow,
+  parent: MainWindow,
   autoHideMenuBar: true,
-  // modal: true
+  modal: true
 };
 
 // Helpers
-function getCurrentTaskHistory() {
+function getCurrentTaskHistory () {
   return JSON.parse(DataHandler.readSync(TASK_HISTORY_PATH));
 }
-function updateTaskHistory(newTaskHistory, errProcess='Something has gone wrong!') {
-  if (typeof(newTaskHistory) !== 'object') return new Error("New task history is of invalid type.");
+function updateTaskHistory (newTaskHistory, errProcess = 'Something has gone wrong!') {
+  if (typeof (newTaskHistory) !== 'object') return new Error('New task history is of invalid type.');
   DataHandler.update(TASK_HISTORY_PATH, JSON.stringify(newTaskHistory), (err) => {
     if (err) dialog.showErrorBox('Error', `${err}\n${errProcess}`);
   });
@@ -150,13 +149,12 @@ ipcMain.on('ask-remove-task', (event, data) => {
 // Prompt for the new name
 ipcMain.handle('edit-task-name', async (event, taskInfo) => {
   return await Promptr.prompt(NEW_TASK_WINDOW_CONFIG, taskInfo.name).then((newName) => {
-    
     // Update database
     const CURRENT_HISTORY = getCurrentTaskHistory();
 
     // Create a new key identical to the old task, just with a different name
-    let renamedTask = {};
-    // renamedTask[newName] = {}; 
+    const renamedTask = {};
+    // renamedTask[newName] = {};
     Object.assign(renamedTask, CURRENT_HISTORY[taskInfo.id]);
     renamedTask.name = newName;
 
@@ -168,7 +166,7 @@ ipcMain.handle('edit-task-name', async (event, taskInfo) => {
 
     // Return the name to the Task component
     return newName;
-  })
+  });
 });
 
 // MENU BAR LISTENERS
@@ -184,4 +182,3 @@ ipcMain.on('about', event =>
     buttons: ['Close']
   })
 );
-
